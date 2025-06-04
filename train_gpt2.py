@@ -254,7 +254,7 @@ if ddp:
     model = DDP(model, device_ids = [ddp_local_rank])
 
 with open(r'input.txt', 'r') as f:
-    text = f.read()
+    text = f.read() # deleted the fineweb database for space, input.txt used as a place holder
 
 #max_steps: 19073
 
@@ -290,6 +290,8 @@ grad_accum_steps = total_batch_size // (B * T)
 optimizer = raw_model.configure_optimizers(weight_decay = 0.1, learning_rate=3e-4, device='cuda')
 eval = 1
 eval_iter = 1000
+
+# training loop
 
 for i in range(max_steps):
     t0 = time.time()
@@ -346,16 +348,16 @@ torch.save(model.state_dict(), "test_Model.pt")
 
 checkpoint = torch.load("best_val_model.pt", map_location="cuda:0", weights_only=True)
 
-# Remove 'module._orig_mod.' prefix if it exists
 from collections import OrderedDict
 new_state_dict = OrderedDict()
 
 for k, v in checkpoint.items():
-    # Strip 'module._orig_mod.' from key names
-    new_key = k.replace("module._orig_mod.", "")  # Adjust this if another prefix is present
+    new_key = k.replace("module._orig_mod.", "")
     new_state_dict[new_key] = v
 
-# Load the cleaned state dict
+
+# load in the trained model for testing
+
 model = GPT(GPTConfig(vocab_size=50304))
 model.load_state_dict(new_state_dict, strict=True)
 model.to('cuda')
