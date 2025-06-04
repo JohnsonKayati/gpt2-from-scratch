@@ -6,8 +6,8 @@ A full GPT-2 implementation built from scratch in PyTorch and trained on **10 bi
 
 ##  Overview
 
--  Built completely from scratch — **no Hugging Face**, no pre-built layers
--  Full implementation of GPT-2's decoder-only transformer
+-  Built completely from scratch — **no Hugging Face**, no pre built layers
+-  Full implementation of GPT-2's decoder only transformer
 -  Trained using **Distributed Data Parallel (DDP)** across 8× A100 GPUs
 -  Tokenized and processed **10 billion tokens** over 4 hours
 -  Optimized with: **gradient accumulation**, **custom weight init**, **dynamic optimizer configs**, and **sharded data loaders**
@@ -16,15 +16,15 @@ A full GPT-2 implementation built from scratch in PyTorch and trained on **10 bi
 
 ##  Motivation
 
-The goal of this project was to **recreate GPT-2 from scratch** to gain a real, working understanding of how large-scale transformers operate. Every component — from embeddings to attention to loss computation — was implemented manually to demystify the black box and optimize for real-world performance.
+The goal of this project was to **recreate GPT-2 from scratch** to gain a real, working understanding of how large-scale transformers operate. Every component from embeddings to attention to loss computation was implemented manually to demystify the black box and optimize for real world performance.
 
 ---
 
 ##  Architecture Overview
 
-- **Decoder-only transformer** modeled after GPT-2
-- Multi-head masked self-attention
-- Position-wise feedforward layers
+- **Decoder only transformer** modeled after GPT-2
+- Multihead masked self attention
+- Position wise feedforward layers
 - **Residual connections** and **layer normalization** throughout
 - Learned positional embeddings
 - Fully compatible with autoregressive language modeling
